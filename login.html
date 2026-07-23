@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .gmail-icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .gmail-icon img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #777;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .form-options a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-options a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .signup-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup-text a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="gmail-icon">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3Cpath fill='none' d='M0 0h48v48H0z'/%3E%3C/svg%3E" 
+                 alt="Gmail" style="width: 60px; height: 60px;">
+        </div>
+        
+        <h2>Sign In</h2>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Gmail Address</label>
+                <input type="email" id="email" placeholder="yourname@gmail.com" required>
+                <div class="error-message" id="emailError">Please enter a valid Gmail address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" placeholder="Enter your password" required minlength="6">
+                    <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+                </div>
+                <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+            </div>
+
+            <div class="form-options">
+                <label>
+                    <input type="checkbox" id="remember"> Remember me
+                </label>
+                <a href="#">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">Sign In</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            ✅ Login successful! Welcome back.
+        </div>
+
+        <div class="signup-text">
+            Don't have an account? <a href="#">Create one</a>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const successMessage = document.getElementById('successMessage');
+        const togglePassword = document.getElementById('togglePassword');
+
+        // Toggle password visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+
+        // Validate Gmail address
+        function validateEmail(email) {
+            const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            return gmailRegex.test(email);
+        }
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+
+            // Validate email
+            const email = emailInput.value.trim();
+            if (!validateEmail(email)) {
+                emailError.classList.add('show');
+                emailInput.style.borderColor = '#e74c3c';
+                isValid = false;
+            } else {
+                emailError.classList.remove('show');
+                emailInput.style.borderColor = '#e0e0e0';
+            }
+
+            // Validate password
+            const password = passwordInput.value;
+            if (password.length < 6) {
+                passwordError.classList.add('show');
+                passwordInput.style.borderColor = '#e74c3c';
+                isValid = false;
+            } else {
+                passwordError.classList.remove('show');
+                passwordInput.style.borderColor = '#e0e0e0';
+            }
+
+            // If valid, show success
+            if (isValid) {
+                successMessage.classList.add('show');
+                
+                // Log credentials (for demo purposes)
+                console.log('Login attempt:', { email, password });
+                
+                // Reset form after 3 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                    form.reset();
+                }, 3000);
+            }
+        });
+
+        // Clear errors on input
+        emailInput.addEventListener('input', function() {
+            if (this.value.trim()) {
+                emailError.classList.remove('show');
+                this.style.borderColor = '#e0e0e0';
+            }
+        });
+
+        passwordInput.addEventListener('input', function() {
+            if (this.value.length >= 6) {
+                passwordError.classList.remove('show');
+                this.style.borderColor = '#e0e0e0';
+            }
+        });
+    </script>
+</body>
+</html>
